@@ -14,7 +14,7 @@ import javafx.application.Application;
  *
  * @author ciaran
  */
-public class Jgrep {
+public class jGrep {
 
     // jgrep path glob pattern
     
@@ -36,7 +36,7 @@ public class Jgrep {
             try {
                 search.run(true);
             } catch (IOException ex) {
-                Logger.getLogger(Jgrep.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(jGrep.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
