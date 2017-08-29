@@ -6,8 +6,6 @@
 package jgrep;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.FileSystems;
@@ -28,6 +26,8 @@ import java.util.stream.StreamSupport;
 
 /**
  *
+ * TODO : Add a call back event for when result is found
+ * 
  * @author ciaran
  */
 public class Search {
@@ -46,7 +46,7 @@ public class Search {
         return results;
     }
     
-    public void run() throws IOException {
+    public void run(boolean printResult) throws IOException {
         PathMatcher globMatcher = FileSystems.getDefault().getPathMatcher("glob:" + glob);
         Pattern regPattern = Pattern.compile(pattern);
 
@@ -59,7 +59,9 @@ public class Search {
                             stream
                                 .filter(line -> regPattern.matcher(line.getLine()).matches())
                                 .forEach(l -> { 
-                                    //System.out.println(l);
+                                    if (printResult) {
+                                        System.out.println(l);
+                                    }
                                     results.add(l);
                                 });
                         } catch (IOException ex) {

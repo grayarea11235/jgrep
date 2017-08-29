@@ -8,6 +8,7 @@ package jgrep;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Application;
 
 /**
  *
@@ -22,17 +23,21 @@ public class Jgrep {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        final String path = args[0];
-        final String glob = args[1];
-        final String pattern = args[2];
+        if (args.length == 0) {
+            Application.launch(jGrepFx.class, args);
+        } else {
+            final String path = args[0];
+            final String glob = args[1];
+            final String pattern = args[2];
         
         
-//        Search search = new Search("C:\\Temp", "**/*.c", ".*");
-        Search search = new Search(path, glob, pattern);
-        try {
-            search.run();
-        } catch (IOException ex) {
-            Logger.getLogger(Jgrep.class.getName()).log(Level.SEVERE, null, ex);
+    //        Search search = new Search("C:\\Temp", "**/*.c", ".*");
+            Search search = new Search(path, glob, pattern);
+            try {
+                search.run(true);
+            } catch (IOException ex) {
+                Logger.getLogger(Jgrep.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }
